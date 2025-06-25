@@ -24,7 +24,7 @@ jobs:
         pip install pytest
 
     - name: Run tests
-      run: pytest model_test.yml
+      run: pytest model_test.py
 
     - name: Build Docker image
       run: docker build -t house-price-api .
