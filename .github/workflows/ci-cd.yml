@@ -24,14 +24,14 @@ jobs:
         pip install pytest
 
     - name: Run tests
-      run: pytest tests/
+      run: pytest model_test.yml
 
     - name: Build Docker image
       run: docker build -t house-price-api .
 
     # Optional: Push to Docker Hub
     # - name: Log in to Docker Hub
-    #   run: echo "Password" | docker login -u "srisoudamini" --password-stdin
+    #   run: echo "DockerGr8" | docker login -u "srisoudamini" --password-stdin
 
     # - name: Push Docker image
     #   run: |
