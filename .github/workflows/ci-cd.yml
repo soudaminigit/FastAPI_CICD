@@ -29,10 +29,7 @@ jobs:
     - name: Build Docker image
       run: docker build -t house-price-api .
 
-    # Optional: Push to Docker Hub
-    # - name: Log in to Docker Hub
-    #   run: echo "DockerGr8" | docker login -u "srisoudamini" --password-stdin
-
+    
     # - name: Push Docker image
     #   run: |
     #     docker tag house-price-api srisoudamini/house-price-api:latest
