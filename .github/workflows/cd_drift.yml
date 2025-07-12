@@ -1,0 +1,59 @@
+name: CI/CD for Data Drift
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # ⏰ every day at midnight UTC
+  workflow_dispatch:      # 🔁 allow manual trigger
+
+jobs:
+  detect-drift:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: ✅ Checkout repo
+      uses: actions/checkout@v3
+
+    - name: 🐍 Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: 📦 Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install scipy pandas
+
+    - name: 🧪 Run drift detection
+      id: drift_check
+      run: |
+        python detect_drift.py
+
+  retrain-if-drift:
+    needs: detect-drift
+    if: failure()  # ❗ Trigger only if drift script failed
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install pandas scikit-learn
+
+    - name: Retrain model
+      run: python retrain_model.py
+
+    - name: Commit updated model
+      run: |
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub Action"
+        git add model/house_model.pkl
+        git commit -m " Retrained model due to drift"
+        git push "
