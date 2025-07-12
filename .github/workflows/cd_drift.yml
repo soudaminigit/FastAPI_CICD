@@ -1,29 +1,32 @@
 name: CI/CD for Data Drift
 
+#on:
+#  schedule:
+#    - cron: "0 0 * * *"  # ⏰ every day at midnight UTC
+#  workflow_dispatch:      # 🔁 allow manual trigger
 on:
-  schedule:
-    - cron: "0 0 * * *"  # ⏰ every day at midnight UTC
-  workflow_dispatch:      # 🔁 allow manual trigger
-
+  push:
+    branches:
+      - main
 jobs:
   detect-drift:
     runs-on: ubuntu-latest
 
     steps:
-    - name: ✅ Checkout repo
+    - name:  Checkout repo
       uses: actions/checkout@v3
 
-    - name: 🐍 Set up Python
+    - name:  Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: "3.10"
 
-    - name: 📦 Install dependencies
+    - name:  Install dependencies
       run: |
         pip install -r requirements.txt
         pip install scipy pandas
 
-    - name: 🧪 Run drift detection
+    - name:  Run drift detection
       id: drift_check
       run: |
         python detect_drift.py
