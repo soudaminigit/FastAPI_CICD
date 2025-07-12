@@ -5,7 +5,7 @@ import joblib
 import os
 
 # Load updated training data
-data = pd.read_csv("current_data.csv")
+data = pd.read_csv("current_data.tsv")
 X = data[["sqft", "bedrooms", "age"]]
 y = data["price"]
 

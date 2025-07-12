@@ -3,8 +3,8 @@ from scipy.stats import ks_2samp
 import sys
 
 # Load reference data (previous distribution) and current data
-reference = pd.read_csv("reference_data.csv")
-current = pd.read_csv("current_data.csv")
+reference = pd.read_csv("reference_data.tsv")
+current = pd.read_csv("current_data.tsv")
 
 # Select columns to monitor for drift
 columns_to_check = ["sqft", "bedrooms", "age"]
