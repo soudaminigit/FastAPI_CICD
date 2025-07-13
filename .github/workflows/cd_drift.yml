@@ -53,11 +53,11 @@ jobs:
     - name: Retrain model
       run: python retrain_model.py
 
-    - name: Commit updated model
+    #- name: Commit updated model
       
-      run: |
-        git config --global user.email "action@github.com"
-        git config --global user.name "GitHub Action"
-        git add model/house_model.pkl
-        git diff --cached --quiet || git commit -m 'Retrained model due to drift'
-        git push
+    #  run: |
+    #    git config --global user.email "action@github.com"
+    #    git config --global user.name "GitHub Action"
+    #    git add model/house_model.pkl
+    #    git diff --cached --quiet || git commit -m 'Retrained model due to drift'
+     #   git push
