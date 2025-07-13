@@ -1,13 +1,13 @@
 name: CI/CD for Data Drift
 
-on:
-  schedule:
-    - cron: "0 0 * * *"  #  every day at midnight UTC
-  workflow_dispatch:      #  allow manual trigger
 #on:
-#  push:
-#    branches:
-#      - main
+#  schedule:
+#    - cron: "0 0 * * *"  #  every day at midnight UTC
+#  workflow_dispatch:      #  allow manual trigger
+on:
+  push:
+    branches:
+      - main
 jobs:
   detect-drift:
     runs-on: ubuntu-latest
